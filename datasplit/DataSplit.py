@@ -2,6 +2,7 @@ import time
 import os
 file_path = os.path.dirname(__file__)
 import sys
+sys.path.append(file_path)
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QFileDialog
 from PyQt5.QtCore import QStringListModel
 # 导入UI的所有类
