@@ -12,3 +12,4 @@ conda install git
 pip install git+https://gitee.com/KingoftheNight/DataSplit.git
 ```
 ## Use
+![avatar](/imgs/Use.gif)
