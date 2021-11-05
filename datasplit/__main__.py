@@ -1,30 +1,13 @@
 import time
 import os
 file_path = os.path.dirname(__file__)
+img_path = os.path.join(file_path, 'imgs')
 import sys
 sys.path.append(file_path)
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QFileDialog
 from PyQt5.QtCore import QStringListModel
 # 导入UI的所有类
-try:
-    from . import UI
-    from . import create
-    from . import open
-    from . import standard
-    from . import split
-    from . import about
-    from . import save
-    from . import function
-except:
-    import UI
-    import create
-    import open
-    import standard
-    import split
-    import about
-    import save
-    import function
-from UI import *
+from main import *
 from create import *
 from open import *
 from standard import *
@@ -32,7 +15,6 @@ from split import *
 from about import *
 from save import *
 from function import *
-
 
 # 创建类
 class MyWindow(QMainWindow):
@@ -77,6 +59,7 @@ class MyWindow(QMainWindow):
         self.slm.setStringList(self.qList)
         self.listView.setModel(self.slm)
         self.listView.clicked.connect(self.click_create)
+        self.ui.result_line.setText('Total: ' + str(len(file_list)))
         # 给子窗口传递参数
         self.child_split.ui_split.label_main.setText('||'.join(self.qList))
 
@@ -138,7 +121,7 @@ class MyWindow(QMainWindow):
         QMainWindow.__init__(self)
         # 继承
         self.ui = Ui_MainWindow()
-        self.setWindowIcon(QtGui.QIcon('./imgs/Logo.ico'))
+        self.setWindowIcon(QtGui.QIcon(os.path.join(img_path, 'Logo.ico')))
         self.ui.setupUi(self)
         self.child_create = CreateWindow()
         self.child_open = OpenWindow()
@@ -148,7 +131,7 @@ class MyWindow(QMainWindow):
         self.child_save = SaveWindow()
         # 定义列表
         self.listView = self.ui.search_list
-        self.slm = QStringListModel()
+        self.slm = QStringListModel(self.listView)
         self.qList = ['PDB_id\tClass\tfile\tsite']
         self.slm.setStringList(self.qList)
         self.listView.setModel(self.slm)
@@ -192,7 +175,7 @@ class CreateWindow(QDialog):
         QDialog.__init__(self)
         self.ui_create = Ui_Create()
         self.ui_create.setupUi(self)
-        self.setWindowIcon(QtGui.QIcon('./imgs/Logo.ico'))
+        self.setWindowIcon(QtGui.QIcon(os.path.join(img_path, 'Logo.ico')))
         self.ui_create.create_go_button.clicked.connect(self.click_load)
         self.ui_create.create_tool_button.clicked.connect(self.click_tool)
         self.ui_create.create_tool_button_2.clicked.connect(self.click_tool_2)
@@ -211,9 +194,9 @@ class OpenWindow(QDialog):
         QDialog.__init__(self)
         self.ui_open = Ui_Open()
         self.ui_open.setupUi(self)
-        self.setWindowIcon(QtGui.QIcon('./imgs/Logo.ico'))
+        self.setWindowIcon(QtGui.QIcon(os.path.join(img_path, 'Logo.ico')))
         self.listView_open = self.ui_open.open_list
-        self.slm_open = QStringListModel()
+        self.slm_open = QStringListModel(self.listView_open)
         self.qList_open = os.listdir(os.path.join(file_path, 'list'))
         self.slm_open.setStringList(self.qList_open)
         self.listView_open.setModel(self.slm_open)
@@ -237,7 +220,7 @@ class StandardWindow(QDialog):
         QDialog.__init__(self)
         self.ui_stand = Ui_Standard()
         self.ui_stand.setupUi(self)
-        self.setWindowIcon(QtGui.QIcon('./imgs/Logo.ico'))
+        self.setWindowIcon(QtGui.QIcon(os.path.join(img_path, 'Logo.ico')))
         self.ui_stand.standard_button.clicked.connect(self.click_standard)
         self.ui_stand.standard_tool.clicked.connect(self.fileread_standard)
 
@@ -266,7 +249,7 @@ class SplitWindow(QDialog):
         QDialog.__init__(self)
         self.ui_split = Ui_Split()
         self.ui_split.setupUi(self)
-        self.setWindowIcon(QtGui.QIcon('./imgs/Logo.ico'))
+        self.setWindowIcon(QtGui.QIcon(os.path.join(img_path, 'Logo.ico')))
         self.ui_split.label_main
         self.ui_split.split_load_button.clicked.connect(self.flush_split)
         self.ui_split.split_button.clicked.connect(self.click_split)
@@ -279,7 +262,7 @@ class AboutWindow(QDialog):
         QDialog.__init__(self)
         self.ui_about = Ui_About()
         self.ui_about.setupUi(self)
-        self.setWindowIcon(QtGui.QIcon('./imgs/Logo.ico'))
+        self.setWindowIcon(QtGui.QIcon(os.path.join(img_path, 'Logo.ico')))
 
 
 class SaveWindow(QDialog):
@@ -295,7 +278,7 @@ class SaveWindow(QDialog):
         QDialog.__init__(self)
         self.ui_save = Ui_Save()
         self.ui_save.setupUi(self)
-        self.setWindowIcon(QtGui.QIcon('./imgs/Logo.ico'))
+        self.setWindowIcon(QtGui.QIcon(os.path.join(img_path, 'Logo.ico')))
         self.ui_save.save_button.clicked.connect(self.click_save)
 
 
@@ -327,3 +310,4 @@ def datasplit():
 
 if __name__ == '__main__':
     datasplit()
+    

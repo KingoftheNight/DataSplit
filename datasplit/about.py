@@ -9,6 +9,9 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import os
+file_path = os.path.dirname(__file__)
+img_path = os.path.join(file_path, 'imgs')
 
 
 class Ui_About(object):
@@ -21,7 +24,7 @@ class Ui_About(object):
         self.label_2 = QtWidgets.QLabel(Dialog)
         self.label_2.setMinimumSize(QtCore.QSize(120, 120))
         self.label_2.setMaximumSize(QtCore.QSize(120, 120))
-        self.label_2.setStyleSheet("background-image: url(./imgs/super.png);")
+        self.label_2.setStyleSheet("background-image: url(" + os.path.join(img_path, 'super.png').replace('\\', '/') + ");")
         self.label_2.setText("")
         self.label_2.setObjectName("label_2")
         self.horizontalLayout.addWidget(self.label_2)

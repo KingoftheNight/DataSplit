@@ -1,4 +1,5 @@
 import os
+import base64
 file_path = os.path.dirname(__file__)
 download_path = os.path.join(file_path, 'download')
 data_path = os.path.join(file_path, 'data')
@@ -7,7 +8,6 @@ img_path = os.path.join(file_path, 'imgs')
 import csv
 import numpy as np
 import time
-import base64
 
 if 'download' not in os.listdir(file_path):
     os.makedirs(download_path)
@@ -26,7 +26,6 @@ if 'imgs' not in os.listdir(file_path):
         f.write(base64.b64decode(img2))
     with open(os.path.join(img_path, 'title.png'), 'wb') as f:
         f.write(base64.b64decode(img3))
-
 
 
 def visual_timestamp():
