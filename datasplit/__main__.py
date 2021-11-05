@@ -7,7 +7,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QFileDialog
 from PyQt5.QtCore import QStringListModel
 # 导入UI的所有类
 try:
-    from . import main
+    from . import UI
     from . import create
     from . import open
     from . import standard
@@ -16,7 +16,7 @@ try:
     from . import save
     from . import function
 except:
-    import main
+    import UI
     import create
     import open
     import standard
@@ -24,7 +24,7 @@ except:
     import about
     import save
     import function
-from main import *
+from UI import *
 from create import *
 from open import *
 from standard import *
