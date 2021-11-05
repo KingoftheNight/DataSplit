@@ -9,10 +9,10 @@ setup(name='datasplit',
     author_email='1694822092@qq.com',
     license='BSD 2-Clause',
     packages=['datasplit'],
-    install_requires=[],
+    install_requires=['PyQt5'],
     entry_points={
         'console_scripts': [
-        'datasplit=datasplit.DataSplit:main',
+        'datasplit=datasplit.__main__:datasplit',
             ]
         },
     python_requires=">=3.6",
